@@ -1,5 +1,6 @@
 <?php
 $terms = 0;
+$oldTerms = 0;
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,49 +26,29 @@ $terms = 0;
             
         </div>
     <script>
-        var xhr;
-        var timer;
-        /* function checkDeckNameAvailability() {
-            clearTimeout(timer);
-            timer = setTimeout(function (){
-                var deckName = document.getElementById("deckName").value;
-
-                if (deckName.trim() !== '') {
-                    if (xhr && xhr.readyState !== 4) {
-                        xhr.abort();
-                    }
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "", true);
-                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState == 4 && xhr.status == 200) {
-                            document.getElementById("deckNameError").innerHTML = xhr.responseText;
-                        }
-                    };
-
-                    xhr.send("deckName=" + encodeURIComponent(deckName));
-                } else {
-                    document.getElementById("deckNameError").innerHTML = '';
-                }
-            }, 300);
-        } */
-
-        //document.getElementById("deckName").addEventListener("input", checkDeckNameAvailability);
+        const deletedIds = [];
         $(document).ready(function () {
-            const termID = "<?php echo $terms;?>";
-            <?php $terms = $terms + 1;?>
+            var terms = <?php echo json_encode($terms); ?>;
+            var oldTerms = <?php echo json_encode($oldTerms); ?>;
+
             $("#createTerm").click(function () {
-                $("#Deck").append("<input id='newTerm" + termID + "' type='text' class='deckName' placeholder='Term'>");
-                $("#Deck").append("<input id='newTerm" + termID + "' type='text' class='deckName' placeholder='Definition'>");
-                $("#Deck").append("<input id='deleteTerm" + termID + "' type='submit' class='deleteTerm' value = 'Delete'>");
-                $("#Deck").append("<br>");
+                terms++;
+                $("#Deck").append("<div id='termContainer" + terms + "'>");
+                $("#termContainer" + terms).append("<input id='newTerm" + terms + "' type='text' class='deckName' placeholder='Term'>");
+                $("#termContainer" + terms).append("<input id='newDefinition" + terms + "' type='text' class='deckName' placeholder='Definition'>");
+                $("#termContainer" + terms).append("<button id='deleteTerm" + terms + "' class='deleteTerm' data-term-id='" + terms + "'>Delete</button>");
+                $("#Deck").append("</div><br>");
+            });
+
+            $(document).on("click", ".deleteTerm", function () {
+                var termId = $(this).data("term-id");
+                $("#termContainer" + termId).remove();
+                deletedIds.push(termId);
             });
         });
     </script>
 <?php  
     session_start();
-    $terms = 0;
     $deck = "deck"; //change to whatever deck they decided to edit
     if (isset($_POST["deckName"])){
         $servername = "localhost";
@@ -100,8 +81,9 @@ $terms = 0;
         //$terms = $terms + 1;
     //}
     if (isset($_POST["finish"])){
-        
+        //while()
     }
+
     $servername = "localhost";
     $username = "Myles"; 
     $password = "password";
@@ -117,10 +99,12 @@ $terms = 0;
         if ($result){
             echo("<div id='Deck'>");
             while ($row = $result->fetch_assoc()){
+                echo("<div id='termContainer" . ++$terms . "'>");
                 echo("<input id='term" . $row["ID"] . "' type='text' class='deckName' value='" . $row["term"] . "'>");
                 echo("<input id='def" . $row["ID"] . "' type='text' class='deckName' value='" . $row["definition"] . "'>");
                 echo("<input id='deleteTerm" . $row["ID"] . "' type='submit' class='deleteTerm' value = 'Delete'>");
-                echo("<br>");
+                echo("</div><br>");
+                $oldTerms = $oldTerms + 1;
             }
             echo("</div>");
         }
