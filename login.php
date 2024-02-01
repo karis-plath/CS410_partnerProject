@@ -30,9 +30,9 @@
             // submitting new user and pass
             if (isset($_POST["submitNew"])) {
                 $servername = "localhost";
-                $username = "karis"; // user name
-                $password = "pepper"; // password used to login MySQL server
-                $dbname = "cs410";
+                $username = "admin"; // user name
+                $password = "admin"; // password used to login MySQL server
+                $dbname = "410flashcards";
         
                 // Create connection
                 $db = new mysqli($servername, $username, $password, $dbname);
@@ -64,7 +64,7 @@
                         session_start();
                         $_SESSION["Username"] = $user;
                         echo '<script>alert("Account created :D")</script>';
-                        header("Location:card.php");
+                        header("Location:decks.php");
                         exit();
                     }
                 }
@@ -73,9 +73,9 @@
         
             if (isset($_POST['sub'])) {
                 $servername = "localhost";
-                $username = "karis"; 
-                $password = "pepper"; 
-                $dbname = "cs410";
+                $username = "admin"; 
+                $password = "admin"; 
+                $dbname = "410flashcards";
         
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -103,7 +103,7 @@
                                 echo "connected";
                                 session_start();
                                 $_SESSION["Username"] = $name;
-                                header("Location: card.php");
+                                header("Location: decks.php");
                                 exit();
                             }
                         }
