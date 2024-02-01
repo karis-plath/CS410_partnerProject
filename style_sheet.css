@@ -130,4 +130,13 @@ html {
     transform: translateX(-4%);
     cursor: pointer;
   }
+  .termContainers {
+    position: relative;
+    width: 75%;
+    height: 64px;
+    padding: 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
  
