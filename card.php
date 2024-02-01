@@ -41,9 +41,15 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
+    // get total rows
+    $sql = "SELECT * FROM k_deck";
+    $result = $conn->query($sql);
+    $total = mysqli_num_rows($result); 
+
     // Retrieve the first row initially
     $sql = "SELECT term, definition FROM k_deck WHERE ID = 1";
     $result = $conn->query($sql);
+    $total = mysqli_num_rows($result); 
     $row = $result->fetch_assoc();
     $term = $row['term'];
     $definition = $row['definition'];
@@ -92,6 +98,17 @@
         }
         });
     });
+
+    var score = 0; // Declare the score variable
+    var total = <?php echo json_encode($total); ?>;
+    const scoreParagraph = document.querySelector('.score'); // Reference the score element
+    const totalRowsParagraph = document.querySelector('.totalRows'); // Add a new element for total rows
+
+    function scoring() {
+    score++; // Increment the score
+    scoreParagraph.textContent = "Score: " + score + "/" + total; // Update the displayed score
+    }
+
     </script>
 
 
