@@ -41,16 +41,17 @@
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
+        
+        $sql = "SELECT term, definition FROM k_deck WHERE ID = 1";
 
         $i = 1;
         if (isset($_POST['n']))
         {
             $i++;
+            $sql = "SELECT term, definition FROM k_deck WHERE ID =" . $i ."";
         }
 
         // getting the first row
-
-        $sql = "SELECT term, definition FROM k_deck WHERE ID = '$i'";
         $result = $conn->query($sql);
 
 
@@ -64,13 +65,16 @@
     ?>
 
     <script>
+        var term = <?php echo json_encode($term); ?>;
+        var definition = <?php echo json_encode($definition); ?>;
+
         // assigns paragraphs to variables
         const termParagraph = document.querySelector('.term');
         const defParagraph = document.querySelector('.definition');
 
         // displays the term on card
-        termParagraph.textContent = "<?php echo $term; ?>";
-        defParagraph.textContent = "<?php echo $definition; ?>";
+        termParagraph.textContent = term;
+        defParagraph.textContent = definition;
 
     </script>
 
