@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +9,7 @@
 <meta charset="UTF-8">
 <meta name="author" content="writer">
 <link rel="stylesheet" href="Style_sheet.css">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <title>Decks Menu</title>
 </head>
 
@@ -14,52 +19,51 @@
   </div>
 
   <div class="center-decks">
-      <button class="wide-button" id="createDeckButton" type="submit">+</button>
-    <div id="storedDecks">
-    </div>
+      <button class="wide-button" id="createDeckButton" type="submit" onclick='makeDeckFunction()'>+</button>
+      <div id="storedDecks">
+      </div>
   </div>
 
   <script>
       let createDeckButton = document.getElementById('createDeckButton');
       let counter = 1; // will be changed to however many decks are in the user table
-
-      createDeckButton.addEventListener('click', function() {
+      
+      function makeDeckButton() {
         let newDeck = document.createElement('button');
         newDeck.setAttribute('class', 'wide-button');
         newDeck.id = 'deck' + counter;
         newDeck.innerHTML = 'New Deck ' + counter;
-        counter++;
-
+        newDeck.setAttribute('store', counter);
+        console.log(newDeck.store);
         newDeck.addEventListener('click', function() {
             console.log('Test ' + newDeck.id)
         });
 
+        var form = document.createElement('form');
+            form.setAttribute('method', 'post');
+            form.setAttribute('action', 'sets.php');
+
+        var hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'deckName';
+            hiddenInput.value = 'deckName' + newDeck.getAttribute('store');
+            form.append(hiddenInput);
+
         let operationsDiv = document.createElement('div');
         operationsDiv.setAttribute('class','operations');
 
-        let editButton = document.createElement('button');
+        let editButton = document.createElement('input');
+            editButton.setAttribute('type', 'submit');
+
         let editImage = document.createElement('img');
-        editImage.src = 'https://cdn-icons-png.flaticon.com/512/84/84380.png';
-        editImage.alt = 'Edit Button';
+            editImage.src = 'https://cdn-icons-png.flaticon.com/512/84/84380.png';
+            editImage.alt = 'Edit Button';
         editButton.classList.add('edit-image', 'operation-button');
         editButton.appendChild(editImage);
-        editButton.addEventListener('click', function() {
+        editButton.addEventListener('click', function(event) {
           event.stopPropagation();
-          var deckName = newDeck.id;
-          console.log(newDeck.id);
-          var xhr = new XMLHttpRequest();
-          xhr.open('POST', 'sets.php', true);
-          xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-          
-          // Send the element ID to the PHP file
-          xhr.send('deckName=' + encodeURIComponent(deckName));
-          
-          xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-              // Handle the response from the PHP file if needed
-              console.log(xhr.responseText);
-            }
-          };
+
+          form.submit();
         });
 
         let trashButton = document.createElement('button');
@@ -70,14 +74,18 @@
         trashButton.appendChild(trashImage);
         trashButton.addEventListener('click', function() {
           event.stopPropagation();
-          alert('Trash image clicked for deck: ' + newDeck.id);
+          document.getElementById("storedDecks").removeChild(newDeck);
         });
 
         operationsDiv.appendChild(editButton);
         operationsDiv.appendChild(trashButton);
-        newDeck.appendChild(operationsDiv);
+        form.appendChild(operationsDiv);
+        newDeck.appendChild(form);
         document.getElementById("storedDecks").append(newDeck);
-      });
+        counter++;
+      };
+
+      // createDeckButton.addEventListener('click', makeDeckButton());
   </script>
 
   </body>
