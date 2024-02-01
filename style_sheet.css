@@ -59,6 +59,20 @@ html {
     transition: 0.6s;
     transform-style: preserve-3d;
     position: relative;
+
+    top: 50%;
+    left: 50%;
+    max-width:400px;
+    height:10px;
+	background-color:rgba(104,94,121,255);
+    border-radius: 25px;
+
+    padding-left: 300px;
+    padding-right: 300px;
+    padding-top: 350px;
+    padding-right: 350px;
+
+    margin-left: 525px;
 }
 
 .front,
@@ -80,7 +94,20 @@ html {
 }
 
 .arrows{
-    padding: 50px;
+    margin-left: 850px;
+    margin-top: 400px;
+}
+
+.arrows button{
+    border-radius: 40%; /* Create circular shape */
+    background-color: #252525; /* Set background color */
+    text-align: center; /* Center text within the circle */
+    color: white;
+
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 15px;
+    padding-right: 15px;
 }
 
  
