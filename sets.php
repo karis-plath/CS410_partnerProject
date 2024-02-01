@@ -13,7 +13,7 @@ $oldTerms = 0;
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-    <form method="post" action="">
+    <form method="post" action="update_table.php">
         <div class= "deckName">
             <input id="deckName" type="text" class="deckName1" name="deckName" placeholder="Deck Name">
             <span id="deckNameError" class="error"></span>
@@ -21,6 +21,9 @@ $oldTerms = 0;
         <br>
         <input id="finish" type="submit" value="Finish">
         <button id="createTerm" type="button" class="createTerm">Create Term</button>
+        <input type="hidden" name="termArray" id="termArrayIn">
+        <input type="hidden" name="defArray" id="defArrayIn">
+        <input type="hidden" name="deckName" id="deckNameInput">
     </form>
         <div id="Deck">
 <?php  
@@ -130,6 +133,10 @@ $oldTerms = 0;
                 alert("Please fill in all the text boxes before finishing.");
                 e.preventDefault();
             }
+            document.getElementById("termArrayIn").value = JSON.stringify(termValues);
+            document.getElementById("defArrayIn").value = JSON.stringify(defValues);
+            var deckName = $("#deckName").val().trim();
+            document.getElementById("deckNameInput").value = deckName;
         });
     });
     </script>
