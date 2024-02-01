@@ -22,8 +22,7 @@
 
         <!-- arrow + flip buttons -->
         <div class="arrows">
-            <button class="previous"><-</button>
-            <button class="flip" onclick="flipCard(document.querySelector('.flipper'))">%</button>
+            <button name="n" class="previous"><-</button>
             <button class="next">-></button>
         </div>
 </div>
@@ -43,9 +42,17 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Assuming a table named 'flashcards' with columns 'term_id', 'term', and 'definition'
-        $sql = "SELECT term, definition FROM k_deck WHERE ID = 1";
+        $i = 1;
+        if (isset($_POST['n']))
+        {
+            $i++;
+        }
+
+        // getting the first row
+
+        $sql = "SELECT term, definition FROM k_deck WHERE ID = '$i'";
         $result = $conn->query($sql);
+
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
