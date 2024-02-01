@@ -79,11 +79,9 @@
         threeDots.addEventListener('click', function () {
           event.stopPropagation();
           alert('Three dots clicked for deck: ' + newDeck.id);
-          // Add your custom logic here
         });
 
         newDeck.appendChild(threeDots);
-        counter++;
         document.getElementById("storedDecks").append(newDeck);
       });
   </script>

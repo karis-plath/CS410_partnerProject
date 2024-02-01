@@ -19,7 +19,7 @@ $terms = 0;
         </div>
         <br>
         <input id="finish" type="submit" value="Finish">
-        <button id="createTerm" type="button" class="createTerm" value = "Create Term">
+        <button id="createTerm" type="button" class="createTerm">Create Term</button>
     </form>
         <div id="Deck">
             
@@ -55,9 +55,12 @@ $terms = 0;
 
         //document.getElementById("deckName").addEventListener("input", checkDeckNameAvailability);
         $(document).ready(function () {
+            const termID = "<?php echo $terms;?>";
+            <?php $terms = $terms + 1;?>
             $("#createTerm").click(function () {
-                $("#Deck").append("<input type='text' class='deckName' placeholder='Term'>");
-                $("#Deck").append("<input type='text' class='deckName' placeholder='Definition'>");
+                $("#Deck").append("<input id='newTerm" + termID + "' type='text' class='deckName' placeholder='Term'>");
+                $("#Deck").append("<input id='newTerm" + termID + "' type='text' class='deckName' placeholder='Definition'>");
+                $("#Deck").append("<input id='deleteTerm" + termID + "' type='submit' class='deleteTerm' value = 'Delete'>");
                 $("#Deck").append("<br>");
             });
         });
@@ -114,9 +117,9 @@ $terms = 0;
         if ($result){
             echo("<div id='Deck'>");
             while ($row = $result->fetch_assoc()){
-                echo("<input id='term" . $row["ID"] . " type='text' class='deckName' value='" . $row["term"] . "'>");
-                echo("<input id='def" . $row["ID"] . " type='text' class='deckName' value='" . $row["definition"] . "'>");
-                echo("<input id='deleteTerm' type='submit' class='deleteTerm' value = 'Delete'>");
+                echo("<input id='term" . $row["ID"] . "' type='text' class='deckName' value='" . $row["term"] . "'>");
+                echo("<input id='def" . $row["ID"] . "' type='text' class='deckName' value='" . $row["definition"] . "'>");
+                echo("<input id='deleteTerm" . $row["ID"] . "' type='submit' class='deleteTerm' value = 'Delete'>");
                 echo("<br>");
             }
             echo("</div>");
