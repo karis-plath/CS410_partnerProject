@@ -63,6 +63,7 @@
                         $db->query($sql_insert) or die('Sorry, database operation was failed');
                         session_start();
                         $_SESSION["Username"] = $user;
+                        echo '<script>alert("Account created :D")</script>';
                         header("Location:card.php");
                         exit();
                     }
@@ -72,13 +73,14 @@
         
             if (isset($_POST['sub'])) {
                 $servername = "localhost";
-                $username = "karis"; // user name
-                $password = "pepper"; // password used to login MySQL server
+                $username = "karis"; 
+                $password = "pepper"; 
                 $dbname = "cs410";
         
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
-        
+                $check = 0;
+
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
@@ -87,7 +89,7 @@
                 // Use prepared statement in SQL
                 $name = $_POST['user'];
                 $pass = $_POST['pass'];
-                $sql = "SELECT * FROM login WHERE Username = '$name' AND Password = '$pass'";
+                $sql = "SELECT * FROM login";
         
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
