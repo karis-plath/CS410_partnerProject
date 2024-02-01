@@ -6,7 +6,7 @@
     </head>
 
     <body>
-    <div class="flip-container" ">
+    <div class="flip-container">
         <div class="flipper">
         <!-- Term side -->
         <div class="front">
@@ -31,10 +31,11 @@
 
     <?php
     // connecting to db
+    $deckname - "deck"; // pass into
     $servername = "localhost";
-    $username = "karis";
-    $password = "pepper";
-    $dbname = "cs410";
+    $username = "admin";
+    $password = "admin";
+    $dbname = "410flashcards";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -43,12 +44,12 @@
     }
 
     // get total rows
-    $sql = "SELECT * FROM k_deck";
+    $sql = "SELECT * FROM `" . $_SESSION["Username"] . "_" . $deckname . "`";
     $result = $conn->query($sql);
     $total = mysqli_num_rows($result); 
 
     // Retrieve the first row initially
-    $sql = "SELECT term, definition FROM k_deck WHERE ID = 1";
+    $sql = "SELECT term, definition FROM `" . $_SESSION["Username"] . "_" . $deckname . "` WHERE ID = 1";
     $result = $conn->query($sql);
     $total = mysqli_num_rows($result); 
     $row = $result->fetch_assoc();
