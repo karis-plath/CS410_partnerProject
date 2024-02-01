@@ -45,14 +45,14 @@
         editButton.appendChild(editImage);
         editButton.addEventListener('click', function() {
           event.stopPropagation();
-          var deckID = newDeck.id;
+          var deckName = newDeck.id;
           console.log(newDeck.id);
           var xhr = new XMLHttpRequest();
           xhr.open('POST', 'sets.php', true);
           xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
           
           // Send the element ID to the PHP file
-          xhr.send('elementId=' + encodeURIComponent(elementId));
+          xhr.send('deckName=' + encodeURIComponent(deckName));
           
           xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
@@ -60,7 +60,6 @@
               console.log(xhr.responseText);
             }
           };
-          alert('Edit image clicked for deck: ' + newDeck.id);
         });
 
         let trashButton = document.createElement('button');
