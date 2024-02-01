@@ -55,9 +55,12 @@ $terms = 0;
 
         //document.getElementById("deckName").addEventListener("input", checkDeckNameAvailability);
         $(document).ready(function () {
+            const termID = "<?php echo $terms;?>";
+            <?php $terms = $terms + 1;?>
             $("#createTerm").click(function () {
-                $("#Deck").append("<input type='text' class='deckName' placeholder='Term'>");
-                $("#Deck").append("<input type='text' class='deckName' placeholder='Definition'>");
+                $("#Deck").append("<input id='newTerm" + termID + "' type='text' class='deckName' placeholder='Term'>");
+                $("#Deck").append("<input id='newTerm" + termID + "' type='text' class='deckName' placeholder='Definition'>");
+                $("#Deck").append("<input id='deleteTerm" + termID + "' type='submit' class='deleteTerm' value = 'Delete'>");
                 $("#Deck").append("<br>");
             });
         });
