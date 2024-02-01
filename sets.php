@@ -75,11 +75,11 @@ $oldTerms = 0;
         $result = $conn->query($selectTerms);
         if ($result){
             while ($row = $result->fetch_assoc()){
-                echo("<div id='termContainer" . ++$terms . "'>");
+                echo("<div class='termContainers' id='termContainer" . ++$terms . "'>");
                 echo("<input id='term" . $row["ID"] . "' type='text' class='deckName' value='" . $row["term"] . "'>");
                 echo("<input id='def" . $row["ID"] . "' type='text' class='deckName' value='" . $row["definition"] . "'>");
                 echo("<button id='deleteTerm" . $terms . "' class='deleteTerm' data-term-id='" . $terms . "'>Delete</button>");
-                echo("</div><br>");
+                echo("</div>");
                 $oldTerms = $oldTerms + 1;
             }
         }
@@ -94,11 +94,11 @@ $oldTerms = 0;
             terms = oldTerms;
             $("#createTerm").click(function () {
                 terms++;
-                $("#Deck").append("<div id='termContainer" + terms + "'>");
+                $("#Deck").append("<div class='termContainers' id='termContainer" + terms + "'>");
                 $("#termContainer" + terms).append("<input id='newTerm" + terms + "' type='text' class='deckName' placeholder='Term'>");
                 $("#termContainer" + terms).append("<input id='newDefinition" + terms + "' type='text' class='deckName' placeholder='Definition'>");
                 $("#termContainer" + terms).append("<button id='deleteTerm" + terms + "' class='deleteTerm' data-term-id='" + terms + "'>Delete</button>");
-                $("#Deck").append("</div><br>");
+                $("#Deck").append("</div>");
             });
 
             $(document).on("click", ".deleteTerm", function () {
