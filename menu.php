@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="style_sheet.css">
+        <!-- link to icons -->
         <script src="https://kit.fontawesome.com/a6b9663541.js" crossorigin="anonymous"></script>
     </head>
 
@@ -12,6 +13,7 @@
     <header id=bar_up>
         <div id=menu>
             <ul>
+                <!-- list of buttons in menu -->
                 <li id="circle"><a href="decks.php"><i class="fa-solid fa-house"></i></a></li>
                 <li id="circle"><a href="javascript:logout();"><i class="fa-solid fa-right-from-bracket"></i></a></li>
             </ul>

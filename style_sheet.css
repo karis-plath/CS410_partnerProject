@@ -28,7 +28,8 @@ html {
 
 /* menu style */
 #circle{
-  display: inline-block; /* Ensure elements are displayed side-by-side */
+  float: left;
+  display: table-column;
   padding: 10px; /* Adjust padding as needed */
   border-radius: 50%; /* Create circular shape */
   background-color: #f0f0f0; /* Set background color */
