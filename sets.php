@@ -16,11 +16,12 @@ $oldTerms = 0;
     <form method="post" action="update_table.php">
         <div class= "deckName">
             <input id="deckName" type="text" class="deckName1" name="deckName" placeholder="Deck Name">
-            <span id="deckNameError" class="error"></span>
         </div>
         <br>
         <input id="finish" type="submit" value="Finish">
-        <button id="createTerm" type="button" class="createTerm">Create Term</button>
+        <div class="create">
+            <button id="createTerm" type="button" class="createTerm">Create Term</button>
+        </div>
         <input type="hidden" name="termArray" id="termArrayIn">
         <input type="hidden" name="defArray" id="defArrayIn">
         <input type="hidden" name="deckName" id="deckNameInput">
@@ -75,8 +76,8 @@ $oldTerms = 0;
             if ($result){
                 while ($row = $result->fetch_assoc()){
                     echo("<div class='termContainers' id='termContainer" . ++$terms . "'>");
-                    echo("<input id='term" . $row["ID"] . "' type='text' class='deckName' value='" . $row["term"] . "'>");
-                    echo("<input id='def" . $row["ID"] . "' type='text' class='defName' value='" . $row["definition"] . "'>");
+                    echo("<input id='term" . $row["ID"] . "' type='text' class='termInput' value='" . $row["term"] . "'>");
+                    echo("<input id='def" . $row["ID"] . "' type='text' class='defInput' value='" . $row["definition"] . "'>");
                     echo("<button id='deleteTerm" . $terms . "' class='deleteTerm' data-term-id='" . $terms . "'>Delete</button>");
                     echo("</div>");
                     $oldTerms = $oldTerms + 1;
@@ -95,8 +96,8 @@ $oldTerms = 0;
             $("#createTerm").click(function () {
                 terms++;
                 $("#Deck").append("<div class='termContainers' id='termContainer" + terms + "'>");
-                $("#termContainer" + terms).append("<input id='newTerm" + terms + "' type='text' class='newTerm' placeholder='Term'>");
-                $("#termContainer" + terms).append("<input id='newDefinition" + terms + "' type='text' class='newDef' placeholder='Definition'>");
+                $("#termContainer" + terms).append("<input id='newTerm" + terms + "' type='text' class='termInput1' placeholder='Term'>");
+                $("#termContainer" + terms).append("<input id='newDefinition" + terms + "' type='text' class='defInput1' placeholder='Definition'>");
                 $("#termContainer" + terms).append("<button id='deleteTerm" + terms + "' class='deleteTerm' data-term-id='" + terms + "'>Delete</button>");
                 $("#Deck").append("</div>");
             });
@@ -110,7 +111,7 @@ $oldTerms = 0;
             var defValues = [];
             $("#finish").click(function (e) {
             var isEmpty = false;
-            $("input.deckName").each(function () {
+            $("input.termInput").each(function () {
                 var value = $(this).val().trim();
                 if (value === '') {
                     isEmpty = true;
@@ -120,7 +121,7 @@ $oldTerms = 0;
                     termValues.push(value);
                 }
             });
-            $("input.newTerm").each(function () {
+            $("input.termInput1").each(function () {
                 var value = $(this).val().trim();
                 if (value === '') {
                     isEmpty = true;
@@ -130,7 +131,7 @@ $oldTerms = 0;
                     termValues.push(value);
                 }
             });
-            $("input.defName").each(function () {
+            $("input.defInput").each(function () {
                 var value = $(this).val().trim();
                 if (value === '') {
                     isEmpty = true;
@@ -140,7 +141,7 @@ $oldTerms = 0;
                     defValues.push(value);
                 }
             });
-            $("input.newDef").each(function () {
+            $("input.defInput1").each(function () {
                 var value = $(this).val().trim();
                 if (value === '') {
                     isEmpty = true;

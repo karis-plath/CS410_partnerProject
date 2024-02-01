@@ -143,13 +143,57 @@ html {
     transform: translateX(-4%);
     cursor: pointer;
   }
-  .termContainers {
-    position: relative;
-    width: 75%;
-    height: 64px;
-    padding: 25px;
+  input[type="submit"] {
+    display: block;
+    margin: 0 auto;
+  }
+  input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #812d9b;
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+  }
+  .createTerm{
+    width: 40px;
+    height: 40px;
+    margin: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 50%;
     cursor: pointer;
+  }
+  .create{
+    display: flex;
+    flex-direction: column;
+  }
+  button.deleteTerms {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    background-color: #8640be; 
+    color: #fff; 
+    border: none; 
+    cursor: pointer; 
+  }
+  input.termInput {
+    width: 50%;
+    box-sizing: border-box; 
+    padding: 10px; 
+  }
+  input.termInput1 {
+    width: 50%;
+    box-sizing: border-box; 
+    padding: 10px; 
+  }
+  input.defInput {
+    width: calc(50% - 10px); 
+    box-sizing: border-box; 
+    padding: 10px; 
+  }
+  input.defInput1 {
+    width: calc(50% - 10px); 
+    box-sizing: border-box; 
+    padding: 10px; 
   }
  
