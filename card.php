@@ -15,8 +15,8 @@
         <!-- definition side -->
         <div class="back">
             <p class="definition">where definition will be</p>
-            <button class="correct">Got it right!</button>
-            <button class="incorrect">Got it wrong.</button>
+            <button class="correct" onclick="scoring()">check</button>
+            <button class="incorrect">x</button>
         </div>
 </div>
 
@@ -24,6 +24,7 @@
         <div class="arrows">
             <button name="n" class="previous"><-</button>
             <button class="next">-></button>
+            <p class="score">where score will be</p>
         </div>
 </div>
 
@@ -75,6 +76,16 @@
         // displays the term on card
         termParagraph.textContent = term;
         defParagraph.textContent = definition;
+
+        // scoring
+        var score;
+        var correct;
+        var total = <?php echo json_encode(num_rows); ?>;
+        function scoring(){
+            correct += 1;
+            score = correct/total;
+        }
+        
 
     </script>
 
