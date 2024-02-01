@@ -61,6 +61,15 @@ $terms = 0;
                 $("#Deck").append("<br>");
             });
         });
+
+        document.getElementById('createTerm').addEventListener('click', function() {
+            deck = document.getElementById('Deck');
+            term = document.createElement('input');
+            term.setAttribute('type', 'text').setAttribute('class', 'deckName').setAttribute('placeholder', 'Term');
+            definition = document.createElement('input');
+            definition.setAttribute('type', 'text').setAttribute('class', 'deckName').setAttribute('placeholder', 'Definition');
+            deck.appened(term);deck.append(definition);
+        });
     </script>
 <?php  
     session_start();
