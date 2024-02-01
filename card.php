@@ -8,16 +8,17 @@
     <body>
     <div class="flip-container">
         <div class="flipper">
-        <!-- Term side -->
-        <div class="front">
-            <p class="term">where term will be</p>
-        </div>
+            <!-- Term side -->
+            <div class="front">
+                <p class="term">where term will be</p>
+            </div>
 
-        <!-- definition side -->
-        <div class="back">
-            <p class="definition">where definition will be</p>
-            <button class="correct" onclick="scoring()">check</button>
-            <button class="incorrect">x</button>
+            <!-- definition side -->
+            <div class="back">
+                <p class="definition">where definition will be</p>
+                <button class="correct" onclick="scoring()">check</button>
+                <button class="incorrect">x</button>
+            </div>
         </div>
     </div>
 
@@ -27,8 +28,6 @@
             <button class="next">-></button>
             <p class="score">Score:</p>
         </div>
-    </div>
-
     <?php
     // connecting to db
     $deckname - "deck"; // pass into
