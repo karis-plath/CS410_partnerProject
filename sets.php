@@ -8,6 +8,7 @@ $oldTerms = 0;
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="Myles, Karis, Nick">
+<link rel="stylesheet" href="Style_sheet.css">
 <!-- <link rel="stylesheet" href="Style_sheet.css"> -->
 <title>410Flashcards</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
