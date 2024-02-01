@@ -29,6 +29,42 @@ html {
 
 
 /* card page  */
+.flip-container {
+    perspective: 1000px;
+    position: relative;
+    width: 200px; /* Adjust as needed */
+    height: 200px; /* Adjust as needed */
+}
+
+.flip-container:hover .flipper,
+.flip-container.flip .flipper {
+    transform: rotateY(180deg);
+}
+
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.front,
+.back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px; /* Adjust as needed */
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
 .arrows{
     padding: 50px;
 }

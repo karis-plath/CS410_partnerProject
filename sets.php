@@ -47,7 +47,7 @@ $oldTerms = 0;
         die('Unable to connect to database [' . $db->connect_error . ']');
     }
     else{
-        $selectTerms = "SELECT * FROM `" . $_SESSION["username"] . "_" . $deck . "`";
+        $selectTerms = "SELECT * FROM `" . $_SESSION["Username"] . "_" . $deck . "`";
         $result = $conn->query($selectTerms);
         if ($result){
             while ($row = $result->fetch_assoc()){
