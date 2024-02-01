@@ -2,6 +2,7 @@
     <head>
         <link rel="stylesheet" href="style_sheet.css">
         <title>Card</title>
+        <?php include("menu.php") ?>
     </head>
 
     <body>
