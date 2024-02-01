@@ -21,7 +21,7 @@
 
   <script>
       let createDeckButton = document.getElementById('createDeckButton');
-      let counter = 0;
+      let counter = 1; // will be changed to however many decks are in the user table
 
       createDeckButton.addEventListener('click', function() {
         let newDeck = document.createElement('button');
@@ -45,6 +45,21 @@
         editButton.appendChild(editImage);
         editButton.addEventListener('click', function() {
           event.stopPropagation();
+          var deckID = newDeck.id;
+          console.log(newDeck.id);
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', 'sets.php', true);
+          xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          
+          // Send the element ID to the PHP file
+          xhr.send('elementId=' + encodeURIComponent(elementId));
+          
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              // Handle the response from the PHP file if needed
+              console.log(xhr.responseText);
+            }
+          };
           alert('Edit image clicked for deck: ' + newDeck.id);
         });
 
