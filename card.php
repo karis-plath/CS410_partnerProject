@@ -25,7 +25,7 @@
         <div class="arrows">
             <button class="prev"><-</button>
             <button class="next">-></button>
-            <p class="score">where score will be</p>
+            <p class="score">Score:</p>
         </div>
     </div>
 
