@@ -1,3 +1,6 @@
+<?php
+$terms = 0;
+?>
 <!DOCTYPE html>
 <html>
  
@@ -15,16 +18,16 @@
             <span id="deckNameError" class="error"></span>
         </div>
         <br>
+        <input id="finish" type="submit" value="Finish">
+        <button id="createTerm" type="button" class="createTerm" value = "Create Term">
     </form>
-    <input id="createTerm" type="submit" class="createTerm" value = "Create Term">
-    <div id="Deck">
+        <div id="Deck">
             
-    </div>
-    <input id="finish" type="submit" value="Finish">
+        </div>
     <script>
         var xhr;
         var timer;
-        function checkDeckNameAvailability() {
+        /* function checkDeckNameAvailability() {
             clearTimeout(timer);
             timer = setTimeout(function (){
                 var deckName = document.getElementById("deckName").value;
@@ -48,17 +51,14 @@
                     document.getElementById("deckNameError").innerHTML = '';
                 }
             }, 300);
-        }
+        } */
 
-        document.getElementById("deckName").addEventListener("input", checkDeckNameAvailability);
+        //document.getElementById("deckName").addEventListener("input", checkDeckNameAvailability);
         $(document).ready(function () {
-            $("#createTerm").submit(function (e) {
-                e.preventDefault();
-
-                $.post("sets.php", $(this).serialize(), function (data) {
-                if (data.indexOf("<div id='Deck'>") !== -1) {
-                    $("#Deck").append(data);
-                });
+            $("#createTerm").click(function () {
+                $("#Deck").append("<input type='text' class='deckName' placeholder='Term'>");
+                $("#Deck").append("<input type='text' class='deckName' placeholder='Definition'>");
+                $("#Deck").append("<br>");
             });
         });
     </script>
