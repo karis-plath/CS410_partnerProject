@@ -30,12 +30,12 @@
             // submitting new user and pass
             if (isset($_POST["submitNew"])) {
                 $servername = "localhost";
-                $username = "root"; // user name
-                $password = "1111"; // password used to login MySQL server
-                $dbname = "cs485_labs";
+                $username = "karis"; // user name
+                $password = "pepper"; // password used to login MySQL server
+                $dbname = "cs410";
         
                 // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $db = new mysqli($servername, $username, $password, $dbname);
                 // db location, user, passwd, database
         
                 if ($db->connect_errno > 0) {
@@ -63,7 +63,7 @@
                         $db->query($sql_insert) or die('Sorry, database operation was failed');
                         session_start();
                         $_SESSION["Username"] = $user;
-                        header("Location:search_page.php");
+                        header("Location:card.php");
                         exit();
                     }
                 }
@@ -72,9 +72,9 @@
         
             if (isset($_POST['sub'])) {
                 $servername = "localhost";
-                $username = "root"; // user name
-                $password = "1111"; // password used to login MySQL server
-                $dbname = "cs485_labs";
+                $username = "karis"; // user name
+                $password = "pepper"; // password used to login MySQL server
+                $dbname = "cs410";
         
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -101,7 +101,7 @@
                                 echo "connected";
                                 session_start();
                                 $_SESSION["Username"] = $name;
-                                header("Location: search_page.php");
+                                header("Location: card.php");
                                 exit();
                             }
                         }
