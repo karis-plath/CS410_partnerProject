@@ -15,7 +15,7 @@ $oldTerms = 0;
 <body>
     <form method="post" action="">
         <div class= "deckName">
-            <input id="deckName" type="text" class="deckName" name="deckName" placeholder="Deck Name">
+            <input id="deckName" type="text" class="deckName1" name="deckName" placeholder="Deck Name">
             <span id="deckNameError" class="error"></span>
         </div>
         <br>
@@ -23,33 +23,9 @@ $oldTerms = 0;
         <button id="createTerm" type="button" class="createTerm">Create Term</button>
     </form>
         <div id="Deck">
-
 <?php  
     session_start();
     $deck = "deck"; //change to whatever deck they decided to edit
-    if (isset($_POST["deckName"])){
-        $servername = "localhost";
-        $username = "Myles";
-        $password = "password";
-        $dbname = "410flashcards";
-        $conn = new mysqli($servername, $username  , $password, $dbname);
- 
-        if ($conn->connect_errno > 0) {
-            die('Unable to connect to database [' . $db->connect_error . ']');
-        }
-        else{
-            if(isset($_SESSION["username"])){
-                $name = $_POST["deckName"];
-                $checkDeck = "SHOW TABLES LIKE '" . $_SESSION["username"] . "_" . $name . "'";
-                $result = $conn->query($checkDeck);
-                if ($result->num_rows > 0 && $name != $deck){
-                    echo("<p class='error'>Error: Deckname already Exists</p>");
-                }
-            }
-        }
-        $conn->close();
-
-    }
     //if (isset($_POST["createTerm"])){
         //echo("<div id='Deck'>");
         //echo("<input id='newTerm" . $terms . " type='text' class='deckName' placeholder='Term'>");
@@ -58,7 +34,7 @@ $oldTerms = 0;
         //$terms = $terms + 1;
     //}
     if (isset($_POST["finish"])){
-        //while()
+        
     }
 
     $servername = "localhost";
@@ -77,7 +53,7 @@ $oldTerms = 0;
             while ($row = $result->fetch_assoc()){
                 echo("<div class='termContainers' id='termContainer" . ++$terms . "'>");
                 echo("<input id='term" . $row["ID"] . "' type='text' class='deckName' value='" . $row["term"] . "'>");
-                echo("<input id='def" . $row["ID"] . "' type='text' class='deckName' value='" . $row["definition"] . "'>");
+                echo("<input id='def" . $row["ID"] . "' type='text' class='defName' value='" . $row["definition"] . "'>");
                 echo("<button id='deleteTerm" . $terms . "' class='deleteTerm' data-term-id='" . $terms . "'>Delete</button>");
                 echo("</div>");
                 $oldTerms = $oldTerms + 1;
@@ -95,8 +71,8 @@ $oldTerms = 0;
             $("#createTerm").click(function () {
                 terms++;
                 $("#Deck").append("<div class='termContainers' id='termContainer" + terms + "'>");
-                $("#termContainer" + terms).append("<input id='newTerm" + terms + "' type='text' class='deckName' placeholder='Term'>");
-                $("#termContainer" + terms).append("<input id='newDefinition" + terms + "' type='text' class='deckName' placeholder='Definition'>");
+                $("#termContainer" + terms).append("<input id='newTerm" + terms + "' type='text' class='newTerm' placeholder='Term'>");
+                $("#termContainer" + terms).append("<input id='newDefinition" + terms + "' type='text' class='newDef' placeholder='Definition'>");
                 $("#termContainer" + terms).append("<button id='deleteTerm" + terms + "' class='deleteTerm' data-term-id='" + terms + "'>Delete</button>");
                 $("#Deck").append("</div>");
             });
@@ -106,7 +82,56 @@ $oldTerms = 0;
                 $("#termContainer" + termId).remove();
                 deletedIds.push(termId);
             });
+            var termValues = [];
+            var defValues = [];
+            $("#finish").click(function (e) {
+            var isEmpty = false;
+            $("input.deckName").each(function () {
+                var value = $(this).val().trim();
+                if (value === '') {
+                    isEmpty = true;
+                    return false;
+                }
+                else{
+                    termValues.push(value);
+                }
+            });
+            $("input.newTerm").each(function () {
+                var value = $(this).val().trim();
+                if (value === '') {
+                    isEmpty = true;
+                    return false;
+                }
+                else{
+                    termValues.push(value);
+                }
+            });
+            $("input.defName").each(function () {
+                var value = $(this).val().trim();
+                if (value === '') {
+                    isEmpty = true;
+                    return false;
+                }
+                else{
+                    defValues.push(value);
+                }
+            });
+            $("input.newDef").each(function () {
+                var value = $(this).val().trim();
+                if (value === '') {
+                    isEmpty = true;
+                    return false;
+                }
+                else{
+                    defValues.push(value);
+                }
+            });
+            if (isEmpty) {
+                alert("Please fill in all the text boxes before finishing.");
+                e.preventDefault();
+            }
         });
+    });
     </script>
 </div>
 </body>
