@@ -18,15 +18,16 @@
             <button class="correct">Got it right!</button>
             <button class="incorrect">Got it wrong.</button>
         </div>
+</div>
 
         <!-- arrow + flip buttons -->
         <div class="arrows">
             <button class="previous"><-</button>
-            <button class="flip" onclick="flipCard(document.querySelector('.flip-container'))">%</button>
+            <button class="flip" onclick="flipCard(document.querySelector('.flipper'))">%</button>
             <button class="next">-></button>
         </div>
 </div>
-</div>
+
     </body>
 
     <?php
