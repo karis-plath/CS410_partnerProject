@@ -23,30 +23,7 @@ $oldTerms = 0;
         <button id="createTerm" type="button" class="createTerm">Create Term</button>
     </form>
         <div id="Deck">
-            
-        </div>
-    <script>
-        const deletedIds = [];
-        $(document).ready(function () {
-            var terms = <?php echo json_encode($terms); ?>;
-            var oldTerms = <?php echo json_encode($oldTerms); ?>;
 
-            $("#createTerm").click(function () {
-                terms++;
-                $("#Deck").append("<div id='termContainer" + terms + "'>");
-                $("#termContainer" + terms).append("<input id='newTerm" + terms + "' type='text' class='deckName' placeholder='Term'>");
-                $("#termContainer" + terms).append("<input id='newDefinition" + terms + "' type='text' class='deckName' placeholder='Definition'>");
-                $("#termContainer" + terms).append("<button id='deleteTerm" + terms + "' class='deleteTerm' data-term-id='" + terms + "'>Delete</button>");
-                $("#Deck").append("</div><br>");
-            });
-
-            $(document).on("click", ".deleteTerm", function () {
-                var termId = $(this).data("term-id");
-                $("#termContainer" + termId).remove();
-                deletedIds.push(termId);
-            });
-        });
-    </script>
 <?php  
     session_start();
     $deck = "deck"; //change to whatever deck they decided to edit
@@ -97,19 +74,40 @@ $oldTerms = 0;
         $selectTerms = "SELECT * FROM `" . $_SESSION["username"] . "_" . $deck . "`";
         $result = $conn->query($selectTerms);
         if ($result){
-            echo("<div id='Deck'>");
             while ($row = $result->fetch_assoc()){
                 echo("<div id='termContainer" . ++$terms . "'>");
                 echo("<input id='term" . $row["ID"] . "' type='text' class='deckName' value='" . $row["term"] . "'>");
                 echo("<input id='def" . $row["ID"] . "' type='text' class='deckName' value='" . $row["definition"] . "'>");
-                echo("<input id='deleteTerm" . $row["ID"] . "' type='submit' class='deleteTerm' value = 'Delete'>");
+                echo("<button id='deleteTerm" . $terms . "' class='deleteTerm' data-term-id='" . $terms . "'>Delete</button>");
                 echo("</div><br>");
                 $oldTerms = $oldTerms + 1;
             }
-            echo("</div>");
         }
     }
     $conn->close();
 ?>
+<script>
+        const deletedIds = [];
+        $(document).ready(function () {
+            var terms = <?php echo json_encode($terms); ?>;
+            var oldTerms = <?php echo json_encode($oldTerms); ?>;
+            terms = oldTerms;
+            $("#createTerm").click(function () {
+                terms++;
+                $("#Deck").append("<div id='termContainer" + terms + "'>");
+                $("#termContainer" + terms).append("<input id='newTerm" + terms + "' type='text' class='deckName' placeholder='Term'>");
+                $("#termContainer" + terms).append("<input id='newDefinition" + terms + "' type='text' class='deckName' placeholder='Definition'>");
+                $("#termContainer" + terms).append("<button id='deleteTerm" + terms + "' class='deleteTerm' data-term-id='" + terms + "'>Delete</button>");
+                $("#Deck").append("</div><br>");
+            });
+
+            $(document).on("click", ".deleteTerm", function () {
+                var termId = $(this).data("term-id");
+                $("#termContainer" + termId).remove();
+                deletedIds.push(termId);
+            });
+        });
+    </script>
+</div>
 </body>
 </html>
