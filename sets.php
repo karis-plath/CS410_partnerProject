@@ -28,7 +28,8 @@ $oldTerms = 0;
         <div id="Deck">
 <?php  
     session_start();
-    $deck = "deck"; //change to whatever deck they decided to edit
+    $deck = $_POST['deckName'];
+    //change to whatever deck they decided to edit
     //if (isset($_POST["createTerm"])){
         //echo("<div id='Deck'>");
         //echo("<input id='newTerm" . $terms . " type='text' class='deckName' placeholder='Term'>");
@@ -50,16 +51,36 @@ $oldTerms = 0;
         die('Unable to connect to database [' . $db->connect_error . ']');
     }
     else{
-        $selectTerms = "SELECT * FROM `" . $_SESSION["username"] . "_" . $deck . "`";
-        $result = $conn->query($selectTerms);
-        if ($result){
-            while ($row = $result->fetch_assoc()){
-                echo("<div class='termContainers' id='termContainer" . ++$terms . "'>");
-                echo("<input id='term" . $row["ID"] . "' type='text' class='deckName' value='" . $row["term"] . "'>");
-                echo("<input id='def" . $row["ID"] . "' type='text' class='defName' value='" . $row["definition"] . "'>");
-                echo("<button id='deleteTerm" . $terms . "' class='deleteTerm' data-term-id='" . $terms . "'>Delete</button>");
-                echo("</div>");
-                $oldTerms = $oldTerms + 1;
+        $selectTerms = "SELECT * FROM `" . $_SESSION["Username"] . "_" . $deck . "`";
+
+        $createQuery = "CREATE TABLE IF NOT EXISTS " . $_SESSION["Username"] . "_" . $deck . " (ID int not null auto_increment, term varchar(50), definition varchar(255), primary key (ID))";
+
+        // $result = $conn->query($selectTerms);
+        // if ($result){
+        //     while ($row = $result->fetch_assoc()){
+        //         echo("<div class='termContainers' id='termContainer" . ++$terms . "'>");
+        //         echo("<input id='term" . $row["ID"] . "' type='text' class='deckName' value='" . $row["term"] . "'>");
+        //         echo("<input id='def" . $row["ID"] . "' type='text' class='defName' value='" . $row["definition"] . "'>");
+        //         echo("<button id='deleteTerm" . $terms . "' class='deleteTerm' data-term-id='" . $terms . "'>Delete</button>");
+        //         echo("</div>");
+        //         $oldTerms = $oldTerms + 1;
+        //     }
+        // }
+
+        $result = mysqli_query($conn, $createQuery);
+        if ($result === false){
+            echo "Error creating table: " . mysqli_error($conn);
+        } else {
+            $result = $conn->query($selectTerms);
+            if ($result){
+                while ($row = $result->fetch_assoc()){
+                    echo("<div class='termContainers' id='termContainer" . ++$terms . "'>");
+                    echo("<input id='term" . $row["ID"] . "' type='text' class='deckName' value='" . $row["term"] . "'>");
+                    echo("<input id='def" . $row["ID"] . "' type='text' class='defName' value='" . $row["definition"] . "'>");
+                    echo("<button id='deleteTerm" . $terms . "' class='deleteTerm' data-term-id='" . $terms . "'>Delete</button>");
+                    echo("</div>");
+                    $oldTerms = $oldTerms + 1;
+                }
             }
         }
     }
@@ -137,7 +158,6 @@ $oldTerms = 0;
             document.getElementById("defArrayIn").value = JSON.stringify(defValues);
             var deckName = $("#deckName").val().trim();
             document.getElementById("deckNameInput").value = deckName;
-            
         });
     });
     </script>
