@@ -1,6 +1,5 @@
 <?php
-  session_start();
-
+    include("menu.php");
   $servername = "localhost";
   $username = "admin"; 
   $password = "admin";
@@ -43,11 +42,6 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <title>Decks Menu</title>
 </head>
-
-  <div class="circle-buttons">
-    <button class="circle-button">User Icon</button>
-    <button class="circle-button">Home Icon</button>
-  </div>
 
   <div class="center-decks">
       <button class="wide-button" id="createDeckButton" type="submit" onclick=makeDeckButton()>+</button>

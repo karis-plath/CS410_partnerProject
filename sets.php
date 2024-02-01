@@ -1,10 +1,10 @@
 <?php
+include("menu.php");
 $terms = 0;
 $oldTerms = 0;
 ?>
 <!DOCTYPE html>
 <html>
- 
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="Myles, Karis, Nick">
@@ -28,8 +28,7 @@ $oldTerms = 0;
         <input type="hidden" name="deckName" id="deckNameInput">
     </form>
         <div id="Deck">
-<?php  
-    session_start();
+<?php
     $deck = $_POST['deckName'];
     //change to whatever deck they decided to edit
     //if (isset($_POST["createTerm"])){
@@ -44,8 +43,8 @@ $oldTerms = 0;
     }
 
     $servername = "localhost";
-    $username = "Myles"; 
-    $password = "password";
+    $username = "admin"; 
+    $password = "admin";
     $dbname = "410flashcards";
     $conn = new mysqli($servername, $username  , $password, $dbname);
  

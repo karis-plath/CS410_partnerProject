@@ -51,7 +51,7 @@
                     if ($result->num_rows > 0) {
                         // output data of each row
                         while ($row = $result->fetch_assoc()) { // info about query"https://www.w3schools.com/php/php_mysql_select.asp
-                            if ($row["username"] == $user) {
+                            if ($row["Username"] == $user) {
                                 $check = 1;
                                 echo '<script>alert("Username already exists")</script>';
                             }
