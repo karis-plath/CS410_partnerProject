@@ -6,20 +6,21 @@
 <meta name="author" content="Myles, Karis, Nick">
 <!-- <link rel="stylesheet" href="Style_sheet.css"> -->
 <title>410Flashcards</title>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
     <form method="post" action="">
         <div class= "deckName">
             <input id="deckName" type="text" class="deckName" name="deckName" placeholder="Deck Name">
             <span id="deckNameError" class="error"></span>
-            <input id="createTerm" type="submit" class="createTerm" value = "Create Term">
         </div>
         <br>
-        <div id="Deck">
-            
-        </div>
-        <input id="finish" type="submit" value="Finish">
     </form>
+    <input id="createTerm" type="submit" class="createTerm" value = "Create Term">
+    <div id="Deck">
+            
+    </div>
+    <input id="finish" type="submit" value="Finish">
     <script>
         var xhr;
         var timer;
@@ -50,6 +51,16 @@
         }
 
         document.getElementById("deckName").addEventListener("input", checkDeckNameAvailability);
+        $(document).ready(function () {
+            $("#createTerm").submit(function (e) {
+                e.preventDefault();
+
+                $.post("sets.php", $(this).serialize(), function (data) {
+                if (data.indexOf("<div id='Deck'>") !== -1) {
+                    $("#Deck").append(data);
+                });
+            });
+        });
     </script>
 <?php  
     session_start();
@@ -78,13 +89,13 @@
         $conn->close();
 
     }
-    if (isset($_POST["createTerm"])){
-        echo("<div id='Deck'>");
-        echo("<input id='newTerm" . $terms . " type='text' class='deckName' placeholder='Term'>");
-        echo("<input id='newDefinition" . $terms . " type='text' class='deckName' placeholder='Definition'>");
-        echo("</div>");
-        $terms = $terms + 1;
-    }
+    //if (isset($_POST["createTerm"])){
+        //echo("<div id='Deck'>");
+        //echo("<input id='newTerm" . $terms . " type='text' class='deckName' placeholder='Term'>");
+        //echo("<input id='newDefinition" . $terms . " type='text' class='deckName' placeholder='Definition'>");
+        //echo("</div>");
+        //$terms = $terms + 1;
+    //}
     if (isset($_POST["finish"])){
         
     }
