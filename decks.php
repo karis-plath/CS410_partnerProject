@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="Style_sheet.css">
 <title>Decks Menu</title>
 </head>
+
+<?php include ("menu.php");?>
+
   <style>
     .wide-button {
       position: relative;
