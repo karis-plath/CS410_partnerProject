@@ -26,7 +26,20 @@ html {
     backdrop-filter: blur(8px);
 }
 
+/* menu style */
+#circle{
+  display: inline-block; /* Ensure elements are displayed side-by-side */
+  padding: 10px; /* Adjust padding as needed */
+  border-radius: 50%; /* Create circular shape */
+  background-color: #f0f0f0; /* Set background color */
+  text-align: center; /* Center text within the circle */
+  margin-right: 10px; /* Add spacing between circles */
+}
 
+#circle a{
+  color: #333; /* Set link color */
+  text-decoration: none; /* Remove underline from links */
+}
 
 /* card page  */
 .flip-container {
