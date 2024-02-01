@@ -63,6 +63,7 @@
                         $db->query($sql_insert) or die('Sorry, database operation was failed');
                         session_start();
                         $_SESSION["Username"] = $user;
+                        echo '<script>alert("Account created :D")</script>';
                         header("Location:card.php");
                         exit();
                     }
