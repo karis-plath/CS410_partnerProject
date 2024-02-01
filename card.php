@@ -31,6 +31,7 @@
     </body>
 
     <?php
+        // connecting to db
         $servername = "localhost";
         $username = "karis";
         $password = "pepper";
@@ -56,25 +57,13 @@
     ?>
 
     <script>
+        // assigns paragraphs to variables
         const termParagraph = document.querySelector('.term');
         const defParagraph = document.querySelector('.definition');
 
-        // Initially display the term
-        termParagraph.textContent = "<?php echo $term; ?>";  // Assume $term holds the term
+        // displays the term on card
+        termParagraph.textContent = "<?php echo $term; ?>";
         defParagraph.textContent = "<?php echo $definition; ?>";
-
-        const flipButton = document.querySelector('.flip');
-        const backDiv = document.querySelector('.back');
-        const frontDiv = document.querySelector('.front');
-
-        function flipCard(element) {
-            element.classList.toggle('flip');
-            frontDiv.textContent = "<?php echo $term; ?>";
-            backDiv.textContent = "<?php echo $definition; ?>";
-        }
-
-        // Initially display the term
-        termParagraph.textContent = "<?php echo $term; ?>";  // Assume $term holds the term
 
     </script>
 
