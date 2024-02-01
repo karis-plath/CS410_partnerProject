@@ -57,10 +57,11 @@
 
     <script>
         const termParagraph = document.querySelector('.term');
-        const definition = "<?php echo $definition; ?>";  // Assume $definition holds the definition
+        const defParagraph = document.querySelector('.definition');
 
         // Initially display the term
         termParagraph.textContent = "<?php echo $term; ?>";  // Assume $term holds the term
+        defParagraph.textContent = "<?php echo $definition; ?>";
 
         const flipButton = document.querySelector('.flip');
         const backDiv = document.querySelector('.back');
@@ -68,10 +69,9 @@
 
         function flipCard(element) {
             element.classList.toggle('flip');
+            frontDiv.textContent = "<?php echo $term; ?>";
+            backDiv.textContent = "<?php echo $definition; ?>";
         }
-
-        const termParagraph = document.querySelector('.term');
-        const definition = "<?php echo $definition; ?>";  // Assume $definition holds the definition
 
         // Initially display the term
         termParagraph.textContent = "<?php echo $term; ?>";  // Assume $term holds the term
