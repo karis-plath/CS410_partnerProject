@@ -51,7 +51,7 @@
                     if ($result->num_rows > 0) {
                         // output data of each row
                         while ($row = $result->fetch_assoc()) { // info about query"https://www.w3schools.com/php/php_mysql_select.asp
-                            if ($row["Username"] == $user) {
+                            if ($row["username"] == $user) {
                                 $check = 1;
                                 echo '<script>alert("Username already exists")</script>';
                             }
@@ -95,9 +95,9 @@
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while ($row = $result->fetch_assoc()) { // info about query"https://www.w3schools.com/php/php_mysql_select.asp
-                        if ($row["Username"] == $name) {
+                        if ($row["username"] == $name) {
                             $check = 1;
-                            if ($row["Password"] != $pass) {
+                            if ($row["password"] != $pass) {
                                 echo '<script>alert("Username does not match password")</script>';
                             } else {
                                 echo "connected";
