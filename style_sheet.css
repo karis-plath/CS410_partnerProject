@@ -94,20 +94,26 @@ html {
 }
 
 .arrows{
-    margin-left: 850px;
-    margin-top: 400px;
+    margin-left: 875px;
+    margin-top: 350px;
 }
 
 .arrows button{
-    border-radius: 40%; /* Create circular shape */
+    border-radius: 50%; /* Create circular shape */
     background-color: #252525; /* Set background color */
-    text-align: center; /* Center text within the circle */
+
     color: white;
 
     padding-left: 50px;
     padding-right: 50px;
     padding-top: 15px;
     padding-right: 15px;
+}
+
+.arrows p{
+    text-align: center; /* Center text within the circle */
+
+    margin-right: 850px;
 }
 
  
