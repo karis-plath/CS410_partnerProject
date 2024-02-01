@@ -30,7 +30,7 @@
         </div>
     <?php
     // connecting to db
-    $deckname - "deck"; // pass into
+    $deckname = $_SESSION['deckName']; // pass into
     $servername = "localhost";
     $username = "admin";
     $password = "admin";
