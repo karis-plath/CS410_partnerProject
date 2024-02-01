@@ -8,47 +8,6 @@
 <title>Decks Menu</title>
 </head>
 
-<?php include ("menu.php");?>
-
-  <style>
-    .wide-button {
-      position: relative;
-      width: 75%;
-      height: 64px;
-      padding: 25px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .three-dots {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%) rotate(90deg);
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    .circle-buttons {
-      display: flex;
-      flex-direction: column;
-    }
-    .circle-button {
-      width: 40px;
-      height: 40px;
-      margin: 10px;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .center-decks {
-      text-align: center;
-      line-height: 100px;
-    }
-  </style>
-
   <div class="circle-buttons">
     <button class="circle-button">User Icon</button>
     <button class="circle-button">Home Icon</button>
@@ -75,16 +34,34 @@
             console.log('Test ' + newDeck.id)
         });
 
-        let threeDots = document.createElement('span');
-        threeDots.innerHTML = '. . .';
-        threeDots.setAttribute('class', 'three-dots');
+        let operationsDiv = document.createElement('div');
+        operationsDiv.setAttribute('class','operations');
 
-        threeDots.addEventListener('click', function () {
+        let editButton = document.createElement('button');
+        let editImage = document.createElement('img');
+        editImage.src = 'https://cdn-icons-png.flaticon.com/512/84/84380.png';
+        editImage.alt = 'Edit Button';
+        editButton.classList.add('edit-image', 'operation-button');
+        editButton.appendChild(editImage);
+        editButton.addEventListener('click', function() {
           event.stopPropagation();
-          alert('Three dots clicked for deck: ' + newDeck.id);
+          alert('Edit image clicked for deck: ' + newDeck.id);
         });
 
-        newDeck.appendChild(threeDots);
+        let trashButton = document.createElement('button');
+        let trashImage = document.createElement('img');
+        trashImage.src = 'https://cdn-icons-png.flaticon.com/512/484/484662.png';
+        trashImage.alt = 'Trash Button';
+        trashButton.classList.add('trash-image', 'operation-button');
+        trashButton.appendChild(trashImage);
+        trashButton.addEventListener('click', function() {
+          event.stopPropagation();
+          alert('Trash image clicked for deck: ' + newDeck.id);
+        });
+
+        operationsDiv.appendChild(editButton);
+        operationsDiv.appendChild(trashButton);
+        newDeck.appendChild(operationsDiv);
         document.getElementById("storedDecks").append(newDeck);
       });
   </script>
