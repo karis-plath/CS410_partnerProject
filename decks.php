@@ -9,11 +9,21 @@
 </head>
   <style>
     .wide-button {
+      position: relative;
       width: 75%;
-      padding: 10px;
-      margin: 10px 0;
+      height: 64px;
+      padding: 25px;
       border: none;
       border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .three-dots {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%) rotate(90deg);
+      font-size: 18px;
       cursor: pointer;
     }
 
@@ -32,7 +42,7 @@
 
     .center-decks {
       text-align: center;
-      line-height: 200px;
+      line-height: 100px;
     }
   </style>
 
@@ -42,22 +52,41 @@
   </div>
 
   <div class="center-decks">
-    <form method=POST>
-      <button class="wide-button" name="createDeck" type="submit">+</button>
-    </form>
-    <?php
-      // Report all error information on the webpage
-      error_reporting(E_ALL);
-      ini_set('display_errors', 1);
-
-      if (isset($_POST["createDeck"])) {
-          $count = 0;
-          echo '<button class="wide-button" name="createDeck" type="submit">Sample Deck {$count} </button>';
-          $count++;
-          // session_start();
-          // header("Location:sets.php")
-      }
-    ?>
+      <button class="wide-button" id="createDeckButton" type="submit">+</button>
+    <div id="storedDecks">
+    </div>
   </div>
+
+  <script>
+      let createDeckButton = document.getElementById('createDeckButton');
+      let counter = 0;
+
+      createDeckButton.addEventListener('click', function() {
+        let newDeck = document.createElement('button');
+        newDeck.setAttribute('class', 'wide-button');
+        newDeck.id = 'deck' + counter;
+        newDeck.innerHTML = 'New Deck ' + counter;
+        counter++;
+
+        newDeck.addEventListener('click', function() {
+            console.log('Test ' + newDeck.id)
+        });
+
+        let threeDots = document.createElement('span');
+        threeDots.innerHTML = '. . .';
+        threeDots.setAttribute('class', 'three-dots');
+
+        threeDots.addEventListener('click', function () {
+          event.stopPropagation();
+          alert('Three dots clicked for deck: ' + newDeck.id);
+          // Add your custom logic here
+        });
+
+        newDeck.appendChild(threeDots);
+        counter++;
+        document.getElementById("storedDecks").append(newDeck);
+      });
+  </script>
+
   </body>
 </html>
